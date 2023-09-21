@@ -4,13 +4,15 @@ public class Recursia {
     static Scanner in =new Scanner(System.in);
     private static int sumJo = in.nextInt(),count = in.nextInt();
     private static int [] bank = new int[count*2];
+    static int i=0 ,result=0;
+    static boolean[] bol = new boolean[count*2];
     public static void main(String[] args) {
         init(bank.length);
         getBank();
-        System.out.println( raidBank(bank.length-1,bank.length-1));
+        System.out.println( raidBank(bank.length));
 
     }
-    static int i=0 ,result=0;
+
     public static int init (int c){
         if (i == c){
             return 0;
@@ -29,8 +31,10 @@ public class Recursia {
         }
     }
 
-    public static int raidBank(int c ,int t){
 
+
+    public static int raidBank(int c ) {
+/*
         if(t<0){
             return -1;
         }
@@ -47,10 +51,30 @@ public class Recursia {
         if(result==sumJo){
 
             return result;
+        }*/
+
+        if(c==0){
+            return 1;
         }
 
-        return raidBank(c-1,t);
+        if (result < sumJo && bol[c]==false){
+            result += bank[c];
+            return raidBank(c);
+
+        }
+
+        else {
+            c--;
+        }
+        if(c==0){
+            return 1;
+        }
+
+        if(result==sumJo){
+            return result;
+        }
 
 
+        return raidBank(c);
     }
 }
