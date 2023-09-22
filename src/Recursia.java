@@ -9,7 +9,7 @@ public class Recursia {
     public static void main(String[] args) {
         init(bank.length);
         getBank();
-        System.out.println( raidBank(bank.length));
+        System.out.println( raidBank(bank.length-1,bank.length-1,bank.length-1));
 
     }
 
@@ -33,7 +33,7 @@ public class Recursia {
 
 
 
-    public static int raidBank(int c ) {
+    public static int raidBank(int c,int z ,int x) {
 /*
         if(t<0){
             return -1;
@@ -52,29 +52,41 @@ public class Recursia {
 
             return result;
         }*/
+        if(x==0){
+            return -1;
+        }
+        if (z==0){
+            x--;
+            z=x-1;
+            c=z-1;
 
-        if(c==0){
-            return 1;
         }
 
-        if (result < sumJo && bol[c]==false){
+        if(c<0){
+
+            c=z-1;
+            z--;
+        }
+
+
+        if (result < sumJo){
             result += bank[c];
-            return raidBank(c);
+            return raidBank(c-1,z,x);
 
-        }
+        }else if(result>sumJo)
+        {
+            result = bank[x];
+            z--;
 
-        else {
-            c--;
-        }
-        if(c==0){
-            return 1;
         }
 
         if(result==sumJo){
             return result;
         }
+        if(x==0){
+            return -1;
+        }
 
-
-        return raidBank(c);
+        return raidBank(c,z,x);
     }
 }
